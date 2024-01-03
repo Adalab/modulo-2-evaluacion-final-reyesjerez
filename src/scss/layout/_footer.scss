@@ -1,8 +1,18 @@
 .footer {
   width: 100vw;
   padding: 1rem;
-  font-size: 12px;
-  text-align: center;
-  color: $color-secondary;
   background-color: $color-bg;
+  position: fixed;
+  bottom: 0px;
+  text-decoration: none;
+  &__text {
+    font-size: 12px;
+    font-family: $font-main;
+    text-align: center;
+    color: $color-secondary;
+  }
+  &__link{
+    text-decoration: none;
+    color: $color-secondary;
+  }
 }

@@ -1,0 +1,36 @@
+.main{
+    display: flex;
+    padding: 0px 50px;
+    justify-content: space-between;
+    padding-bottom: 100px;
+}
+
+.characters {
+    width: 75%;
+    &__title {
+        text-align: center;
+        font-family: $font-title;
+        font-weight: 700;
+        font-size: 24px;
+        color: $color-bg;
+    }
+    &__list {
+        font-family: $font-main;
+        font-size: 18px;
+    }
+}
+
+.favourites {
+    width: 25%;
+    &__title {
+        text-align: center;
+        font-family: $font-title;
+        font-weight: 700;
+        font-size: 24px;
+        color: $color-bg;
+    }
+    &__list {
+        font-family: $font-main;
+        font-size: 18px;
+    }
+}

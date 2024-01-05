@@ -23,6 +23,8 @@ let favouritesData = [];
 const placeholder =
   "https://via.placeholder.com/300x200/ffc0cb/ffffff/?text=Disney";
 
+const favouritesDatafromLS = JSON.parse(localStorage.getItem("favouritesData"));
+
 // funciones
 
 function renderOne(oneCharacterData) {
@@ -88,20 +90,20 @@ function renderAll() {
 function renderOneFavourite(oneFavouriteData) {
   if (oneFavouriteData.imageUrl === undefined) {
     charactersSelectedUl.innerHTML += `
-      <li class="characters__list__item js__character" data-id="${oneFavouriteData._id}">
-          <img class="characters__list__img" src=${placeholder}
-            alt="Imagen personaje">
-          <h4 class="characters__list__name">${oneFavouriteData.name}</h4>
-      </li>
-      `;
+        <li class="characters__list__item js__character">
+            <img class="characters__list__img" src=${placeholder}
+              alt="Imagen personaje">
+            <h4 class="characters__list__name">${oneFavouriteData.name}</h4>
+        </li>
+        `;
   } else {
-    charactersResultUl.innerHTML += `
-          <li class="characters__list__item js__character" data-id="${oneFavouriteData._id}">
-              <img class="characters__list__img" src="${oneFavouriteData.imageUrl}"
-                alt="Imagen personaje">
-              <h4 class="characters__list__name">${oneFavouriteData.name}</h4>
-          </li>
-          `;
+    charactersSelectedUl.innerHTML += `
+            <li class="characters__list__item js__character">
+                <img class="characters__list__img" src="${oneFavouriteData.imageUrl}"
+                  alt="Imagen personaje">
+                <h4 class="characters__list__name">${oneFavouriteData.name}</h4>
+            </li>
+            `;
   }
 }
 
@@ -110,6 +112,15 @@ function renderFavourites() {
 
   for (const eachCharacter of favouritesData) {
     renderOneFavourite(eachCharacter);
+  }
+}
+
+function renderFavouritesFromLS() {
+  if (favouritesDatafromLS === null) {
+    renderFavourites();
+  } else {
+    favouritesData = favouritesDatafromLS;
+    renderFavourites();
   }
 }
 
@@ -138,9 +149,9 @@ function handleClickCharacters(event) {
     favouritesData.splice(selectedCharacterIndex, 1);
   }
 
-  renderFavourites();
+  localStorage.setItem("favouritesData", JSON.stringify(favouritesData));
 
-  console.log(selectedCharacterObj);
+  renderFavourites();
 }
 
 function handleSubmitForm(event) {
@@ -169,6 +180,8 @@ fetch("//api.disneyapi.dev/character?pageSize=50")
   .then((response) => response.json())
   .then((data) => {
     charactersData = data.data;
+
+    renderFavouritesFromLS();
 
     renderAll();
   });

@@ -14,6 +14,8 @@ const formInputElement = document.querySelector(".js__form__input");
 
 const form = document.querySelector(".js__form");
 
+const deleteAllBtn = document.querySelector(".js__deleteAllCharacters");
+
 // variables de datos
 
 let charactersData = [];
@@ -118,6 +120,12 @@ function renderFavourites() {
   for (const eachDelete of deleteFavourites) {
     eachDelete.addEventListener("click", handleClickDeleteFavourites);
   }
+
+  if (favouritesData.length !== 0) {
+    deleteAllBtn.classList.remove("hidden");
+  } else {
+    deleteAllBtn.classList.add("hidden");
+  }
 }
 
 function renderFavouritesFromLS() {
@@ -209,9 +217,24 @@ function handleClickDeleteFavourites(event) {
   renderFavourites();
 }
 
+function handleClickDeleteAllBtn(event) {
+  const selectedCharacters = document.querySelectorAll(".selected");
+
+  for (const eachSelectedCharacter of selectedCharacters) {
+    eachSelectedCharacter.classList.remove("selected");
+  }
+
+  favouritesData = [];
+  localStorage.removeItem(`favouritesData`);
+
+  renderFavourites();
+}
+
 // eventos
 
 form.addEventListener("submit", handleSubmitForm);
+
+deleteAllBtn.addEventListener("click", handleClickDeleteAllBtn);
 
 // código que se ejecuta al cargar
 

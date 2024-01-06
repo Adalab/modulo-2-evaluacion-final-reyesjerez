@@ -17,8 +17,8 @@
     &__list {
         font-family: $font-main;
         font-size: 18px;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        display: flex;
+        flex-wrap: wrap;
         gap: 20px;
         padding: 40px;
         list-style: none;
@@ -29,6 +29,10 @@
             border-radius: 5px;
             padding: 10px;
             position: relative;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         &__name {
             padding-top: 5px;
@@ -52,6 +56,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            color: grey;
+        font-weight: 700;
 
         }
     }
@@ -60,6 +66,9 @@
 
 .favourites {
     width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     &__title {
         text-align: center;
         font-family: $font-title;
@@ -70,14 +79,38 @@
     &__list {
         font-family: $font-main;
         font-size: 18px;
-        display: grid;
-        grid-template-columns: 1fr ;
+        display: flex;
+        flex-wrap: wrap;
         gap: 20px;
-        padding: 40px 20px;
+        padding: 20px;
+        padding-top: 40px;
         list-style: none;
     }
 }
 
 .selected {
     background-color: pink;
+}
+
+.deleteAll{
+    border: solid 2px lightgrey;
+    border-radius: 5px;
+    background-color: white;
+    width: 100px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__text {
+        font-size: 12px;
+        font-family: $font-main;
+        color: grey;
+        font-weight: 700;
+       
+    }
+    
+}
+
+.hidden {
+    display: none;
 }

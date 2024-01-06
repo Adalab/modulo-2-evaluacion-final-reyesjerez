@@ -86,6 +86,14 @@
         padding-top: 40px;
         list-style: none;
     }
+    &__text{
+        padding: 20px;
+        padding-top: 40px;
+        font-size: 12px;
+        font-family: $font-main;
+        color: grey;
+        text-align: center;
+    }
 }
 
 .selected {

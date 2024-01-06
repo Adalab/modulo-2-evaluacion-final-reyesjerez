@@ -16,6 +16,8 @@ const form = document.querySelector(".js__form");
 
 const deleteAllBtn = document.querySelector(".js__deleteAllCharacters");
 
+const favouritesEmptyText = document.querySelector(".js__favouritesEmptyText");
+
 // variables de datos
 
 let charactersData = [];
@@ -123,8 +125,12 @@ function renderFavourites() {
 
   if (favouritesData.length !== 0) {
     deleteAllBtn.classList.remove("hidden");
+    charactersSelectedUl.classList.remove("hidden");
+    favouritesEmptyText.classList.add("hidden");
   } else {
     deleteAllBtn.classList.add("hidden");
+    charactersSelectedUl.classList.add("hidden");
+    favouritesEmptyText.classList.remove("hidden");
   }
 }
 

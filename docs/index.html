@@ -1,69 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Adalab Web Starter Kit</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
-    
-    <link rel="icon" href="./images/favicon.png" />
-    <link rel="stylesheet" href="./assets/main-62015576.css">
-  </head>
 
-  <body>
-    <div class="page">
-      <header class="page__header">
-  <img src="./images/logo-adalab.png" alt="Adalab">
-  <h1>Bienvenidos a Adalab</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tus personajes Disney</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;700&display=swap"
+    rel="stylesheet">
+  
+  <link rel="icon" href="./images/favicon.png" />
+  <link rel="stylesheet" href="./assets/index-8caaf04c.css">
+</head>
+
+<body>
+  <header class="header">
+  <h1 class="header__title">Encuentra a tu personaje favorito</h1>
+  <div class="header__img">
+    <img class="header__img__content" src="./images/castillo.jpg" alt="Fotografía del castillo de Disney">
+  </div>
+  <form class="header__form js__form" action="">
+    <input class="header__form__input js__form__input" type="text" placeholder="Ej. Mickey Mouse">
+    <button class="header__form__btn ">Buscar</button>
+  </form>
 </header>
+  <main class="main">
+  <section class="characters">
+    <h3 class="characters__title">Personajes</h3>
+    <ul class="characters__list js__charactersResultUl">
 
-      <main class="page__main">
-  <h2>Este es el starter kit de Adalab</h2>
-  <p>Lo usamos para aprender:</p>
-  <ul class="main__list">
-    <li>Sass</li>
-    <li>HTML partials</li>
-    <li>Gulp</li>
-    <li>y muchas cosas más</li>
-  </ul>
-  <p>Si quieres saber cúales son las rutas correctas para:</p>
-  <ul class="main__list">
-    <li>
-      una <code class="code">&lt;img /&gt;</code> mira el fichero
-      <code class="code">./src/html/partials/header.html</code>.
-    </li>
-    <li>
-      y para un <code class="code">background-image</code> mira el fichero
-      <code class="code">./src/html/scss/layout/_page.scss</code>.
-    </li>
-  </ul>
-  <p>
-    Si quieres saber cómo usar un partial HTML dentro de otro partial, busca en la carperta
-    <code class="code">./src/html/index.html</code> y
-    <code class="code">./src/html/partials/main.html</code>, y verás cómo estamos creando estos
-    enlaces:
-  </p>
-  <ul class="main__list">
-    <li>
-      <a class="link__adalab" href="https://adalab.es">Adalab</a>
+    </ul>
+  </section>
+  <aside class="favourites">
+    <h3 class="favourites__title">Favoritos</h3>
+    <ul class="favourites__list hidden js__charactersSelectedUl">
 
-    </li>
-    <li>
-      <a class="{=$aClass}" href="./more-info.html">Más info del starter kit</a>
+    </ul>
 
-    </li>
-  </ul>
+    <p class="favourites__text js__favouritesEmptyText">Selecciona tus personajes favoritos para que aparezcan en esta
+      lista.
+    </p>
+    <button class="deleteAll js__deleteAllCharacters">
+      <p class="deleteAll__text">Eliminar todos</p>
+    </button>
+  </aside>
 </main>
-
-      <footer class="page__footer">
-  <small>
-    &copy; Todos los derechos reservados
-    <a class="link__adalab" href="https://adalab.es">Adalab</a>
-
-  </small>
+  <footer class="footer">
+  <p class="footer__text">Todos los derechos reservados
+    <a class="footer__link" href="https://adalab.es">©Adalab 2024</a>
+  </p>
 </footer>
+  <script src="./js/main.js"></script>
+</body>
 
-    </div>
-    <script src="./js/main.js"></script>
-  </body>
 </html>

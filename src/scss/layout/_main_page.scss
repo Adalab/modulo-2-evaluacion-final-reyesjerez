@@ -28,6 +28,7 @@
             border: 2px solid $color-bg;
             border-radius: 5px;
             padding: 10px;
+            position: relative;
         }
         &__name {
             padding-top: 5px;
@@ -36,6 +37,21 @@
             height: 120px;
             width: auto;
             border-radius: 5px;
+        }
+        &__delete {
+            border: solid 2px lightgrey;
+            border-radius: 5px;
+            background-color: white;
+            width: 25px;
+            height: 25px;
+            font-size: 12px;
+            font-family: $font-main;
+            position: absolute;
+            right: -7px;
+            top: -7px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
         }
     }

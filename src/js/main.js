@@ -32,8 +32,6 @@ function renderOne(oneCharacterData) {
     (oneFavourite) => oneFavourite._id === oneCharacterData._id
   );
 
-  console.log(characterIndex);
-
   if (characterIndex === -1) {
     if (oneCharacterData.imageUrl === undefined) {
       charactersResultUl.innerHTML += `
@@ -80,7 +78,6 @@ function renderAll() {
   }
 
   const allCharacters = document.querySelectorAll(".js__character");
-  console.log(allCharacters);
 
   for (const eachCharacter of allCharacters) {
     eachCharacter.addEventListener("click", handleClickCharacters);
@@ -90,18 +87,20 @@ function renderAll() {
 function renderOneFavourite(oneFavouriteData) {
   if (oneFavouriteData.imageUrl === undefined) {
     charactersSelectedUl.innerHTML += `
-        <li class="characters__list__item js__character">
+        <li class="characters__list__item js__character" data-id="${oneFavouriteData._id}">
             <img class="characters__list__img" src=${placeholder}
               alt="Imagen personaje">
             <h4 class="characters__list__name">${oneFavouriteData.name}</h4>
+            <span class="characters__list__delete js__deleteFavourite">X</span>
         </li>
         `;
   } else {
     charactersSelectedUl.innerHTML += `
-            <li class="characters__list__item js__character">
+            <li class="characters__list__item js__character" data-id="${oneFavouriteData._id}">
                 <img class="characters__list__img" src="${oneFavouriteData.imageUrl}"
                   alt="Imagen personaje">
                 <h4 class="characters__list__name">${oneFavouriteData.name}</h4>
+                <span class="characters__list__delete js__deleteFavourite">X</span>
             </li>
             `;
   }
@@ -112,6 +111,12 @@ function renderFavourites() {
 
   for (const eachCharacter of favouritesData) {
     renderOneFavourite(eachCharacter);
+  }
+
+  const deleteFavourites = document.querySelectorAll(".js__deleteFavourite");
+
+  for (const eachDelete of deleteFavourites) {
+    eachDelete.addEventListener("click", handleClickDeleteFavourites);
   }
 }
 
@@ -168,6 +173,40 @@ function handleSubmitForm(event) {
 
       renderAll();
     });
+}
+
+function handleClickDeleteFavourites(event) {
+  //ESCRIBIR UNA FUNCIÓN QUE BORRE LOS FAVORITOS DE LA LISTA Y DE EL LOCALSTORAGE.
+
+  console.log("Click en DELETE");
+
+  const clickedCharacter = event.currentTarget;
+
+  const motherofClickedCharacter = clickedCharacter.parentElement;
+
+  const clickedCharacterId = motherofClickedCharacter.dataset.id;
+
+  const selectedCharacterIndex = favouritesData.findIndex(
+    (oneFavourite) => oneFavourite._id === parseInt(clickedCharacterId)
+  );
+
+  favouritesData.splice(selectedCharacterIndex, 1);
+
+  const selectedCharacters = document.querySelectorAll(".selected");
+
+  console.log(selectedCharacters);
+
+  for (const eachSelectedCharacter of selectedCharacters) {
+    if (eachSelectedCharacter.dataset.id === clickedCharacterId) {
+      eachSelectedCharacter.classList.remove("selected");
+    }
+  }
+
+  localStorage.removeItem(`favouritesData`);
+
+  localStorage.setItem("favouritesData", JSON.stringify(favouritesData));
+
+  renderFavourites();
 }
 
 // eventos

@@ -183,7 +183,12 @@ function handleSubmitForm(event) {
   )
     .then((response) => response.json())
     .then((data) => {
-      charactersData = data.data;
+      if (Array.isArray(data.data)) {
+        charactersData = data.data;
+      } else {
+        charactersData = [];
+        charactersData.push(data.data);
+      }
 
       renderAll();
     });
@@ -193,6 +198,8 @@ function handleClickDeleteFavourites(event) {
   //ESCRIBIR UNA FUNCIÓN QUE BORRE LOS FAVORITOS DE LA LISTA Y DE EL LOCALSTORAGE.
 
   console.log("Click en DELETE");
+
+  //eliminamos el personaje de favouriteData
 
   const clickedCharacter = event.currentTarget;
 
@@ -206,9 +213,9 @@ function handleClickDeleteFavourites(event) {
 
   favouritesData.splice(selectedCharacterIndex, 1);
 
-  const selectedCharacters = document.querySelectorAll(".selected");
+  //quitamos la clase selected en la lista general de personajes
 
-  console.log(selectedCharacters);
+  const selectedCharacters = document.querySelectorAll(".selected");
 
   for (const eachSelectedCharacter of selectedCharacters) {
     if (eachSelectedCharacter.dataset.id === clickedCharacterId) {
@@ -216,9 +223,13 @@ function handleClickDeleteFavourites(event) {
     }
   }
 
+  //eliminamos el personaje del localStorage
+
   localStorage.removeItem(`favouritesData`);
 
   localStorage.setItem("favouritesData", JSON.stringify(favouritesData));
+
+  //volvemos a pintar los personajes favoritos
 
   renderFavourites();
 }

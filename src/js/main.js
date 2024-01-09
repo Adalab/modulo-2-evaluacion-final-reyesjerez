@@ -91,7 +91,7 @@ function renderAll() {
 function renderOneFavourite(oneFavouriteData) {
   if (oneFavouriteData.imageUrl === undefined) {
     charactersSelectedUl.innerHTML += `
-        <li class="characters__list__item js__character" data-id="${oneFavouriteData._id}">
+        <li class="characters__list__item" data-id="${oneFavouriteData._id}">
             <img class="characters__list__img" src=${placeholder}
               alt="Imagen personaje">
             <h4 class="characters__list__name">${oneFavouriteData.name}</h4>
@@ -100,7 +100,7 @@ function renderOneFavourite(oneFavouriteData) {
         `;
   } else {
     charactersSelectedUl.innerHTML += `
-            <li class="characters__list__item js__character" data-id="${oneFavouriteData._id}">
+            <li class="characters__list__item" data-id="${oneFavouriteData._id}">
                 <img class="characters__list__img" src="${oneFavouriteData.imageUrl}"
                   alt="Imagen personaje">
                 <h4 class="characters__list__name">${oneFavouriteData.name}</h4>

@@ -36,6 +36,10 @@
         }
         &__name {
             padding-top: 5px;
+            text-decoration: none;
+            color: black;
+            font-weight: 700;
+
         }
         &__img {
             height: 120px;
@@ -59,6 +63,10 @@
             color: grey;
         font-weight: 700;
 
+        }
+        &__info{
+            color: grey;
+            font-size: 14px;
         }
     }
    
@@ -100,7 +108,7 @@
     background-color: pink;
 }
 
-.deleteAll{
+.button{
     border: solid 2px lightgrey;
     border-radius: 5px;
     background-color: white;

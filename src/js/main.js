@@ -18,6 +18,8 @@ const deleteAllBtn = document.querySelector(".js__deleteAllCharacters");
 
 const favouritesEmptyText = document.querySelector(".js__favouritesEmptyText");
 
+const logBtn = document.querySelector(".js__log");
+
 // variables de datos
 
 let charactersData = [];
@@ -31,6 +33,19 @@ const favouritesDatafromLS = JSON.parse(localStorage.getItem("favouritesData"));
 
 // funciones
 
+function addInfo(character) {
+  if (character.films.length === 0) {
+    return `
+  <p class="characters__list__info"> No aparece en ninguna película.</p>
+  <p class="characters__list__info"> Última actualización: ${character.updatedAt}.</p>
+  `;
+  } else {
+    return `
+  <p class="characters__list__info"> Número de películas: ${character.films.length}.</p>
+  <p class="characters__list__info"> Última actualización: ${character.updatedAt}.</p>
+  `;
+  }
+}
 function renderOne(oneCharacterData) {
   const characterIndex = favouritesData.findIndex(
     (oneFavourite) => oneFavourite._id === oneCharacterData._id
@@ -39,36 +54,63 @@ function renderOne(oneCharacterData) {
   if (characterIndex === -1) {
     if (oneCharacterData.imageUrl === undefined) {
       charactersResultUl.innerHTML += `
-    <li class="characters__list__item js__character" data-id="${oneCharacterData._id}">
+    <li class="characters__list__item js__character" data-id="${
+      oneCharacterData._id
+    }">
         <img class="characters__list__img" src=${placeholder}
           alt="Imagen personaje">
-        <h4 class="characters__list__name">${oneCharacterData.name}</h4>
+        <a class="characters__list__name" href=${
+          oneCharacterData.sourceUrl
+        } target="_blank">${oneCharacterData.name}</a>
+        ${addInfo(oneCharacterData)}
     </li>
     `;
     } else {
       charactersResultUl.innerHTML += `
-        <li class="characters__list__item js__character" data-id="${oneCharacterData._id}">
-            <img class="characters__list__img" src="${oneCharacterData.imageUrl}"
+        <li class="characters__list__item js__character" data-id="${
+          oneCharacterData._id
+        }">
+            <img class="characters__list__img" src="${
+              oneCharacterData.imageUrl
+            }"
               alt="Imagen personaje">
-            <h4 class="characters__list__name">${oneCharacterData.name}</h4>
+            <a class="characters__list__name" href=${
+              oneCharacterData.sourceUrl
+            } target="_blank">${oneCharacterData.name}</a>
+            ${addInfo(oneCharacterData)}
+
         </li>
         `;
     }
   } else {
     if (oneCharacterData.imageUrl === undefined) {
       charactersResultUl.innerHTML += `
-      <li class="characters__list__item selected js__character" data-id="${oneCharacterData._id}">
+      <li class="characters__list__item selected js__character" data-id="${
+        oneCharacterData._id
+      }">
           <img class="characters__list__img" src=${placeholder}
             alt="Imagen personaje">
-          <h4 class="characters__list__name">${oneCharacterData.name}</h4>
+          <a class="characters__list__name" href=${
+            oneCharacterData.sourceUrl
+          } target="_blank">${oneCharacterData.name}</a>
+          ${addInfo(oneCharacterData)}
+
       </li>
       `;
     } else {
       charactersResultUl.innerHTML += `
-          <li class="characters__list__item selected js__character" data-id="${oneCharacterData._id}">
-              <img class="characters__list__img" src="${oneCharacterData.imageUrl}"
+          <li class="characters__list__item selected js__character" data-id="${
+            oneCharacterData._id
+          }">
+              <img class="characters__list__img" src="${
+                oneCharacterData.imageUrl
+              }"
                 alt="Imagen personaje">
-              <h4 class="characters__list__name">${oneCharacterData.name}</h4>
+              <a class="characters__list__name" href=${
+                oneCharacterData.sourceUrl
+              } target="_blank">${oneCharacterData.name}</a>
+              ${addInfo(oneCharacterData)}
+
           </li>
           `;
     }
@@ -94,16 +136,27 @@ function renderOneFavourite(oneFavouriteData) {
         <li class="characters__list__item" data-id="${oneFavouriteData._id}">
             <img class="characters__list__img" src=${placeholder}
               alt="Imagen personaje">
-            <h4 class="characters__list__name">${oneFavouriteData.name}</h4>
+            <a class="characters__list__name" href=${
+              oneFavouriteData.sourceUrl
+            } target="_blank">${oneFavouriteData.name}</a>
+            ${addInfo(oneFavouriteData)}
+
             <span class="characters__list__delete js__deleteFavourite">X</span>
         </li>
         `;
   } else {
     charactersSelectedUl.innerHTML += `
-            <li class="characters__list__item" data-id="${oneFavouriteData._id}">
-                <img class="characters__list__img" src="${oneFavouriteData.imageUrl}"
+            <li class="characters__list__item" data-id="${
+              oneFavouriteData._id
+            }">
+                <img class="characters__list__img" src="${
+                  oneFavouriteData.imageUrl
+                }"
                   alt="Imagen personaje">
-                <h4 class="characters__list__name">${oneFavouriteData.name}</h4>
+                <a class="characters__list__name href=${
+                  oneFavouriteData.sourceUrl
+                } target="_blank">${oneFavouriteData.name}</a>
+                ${addInfo(oneFavouriteData)}
                 <span class="characters__list__delete js__deleteFavourite">X</span>
             </li>
             `;
@@ -213,6 +266,12 @@ function handleClickDeleteFavourites(event) {
 
   favouritesData.splice(selectedCharacterIndex, 1);
 
+  /*const selectedCharacterObj = favouritesData.find(
+    (oneFavourite) => oneFavourite._id === parseInt(clickedCharacterId)
+  );
+
+  console.log(selectedCharacterObj.name);*/
+
   //quitamos la clase selected en la lista general de personajes
 
   const selectedCharacters = document.querySelectorAll(".selected");
@@ -247,11 +306,21 @@ function handleClickDeleteAllBtn(event) {
   renderFavourites();
 }
 
+function handleClickLogBtn(event) {
+  for (const eachFavourite of favouritesData) {
+    console.log(
+      `La dirección de la página de ${eachFavourite.name} es ${eachFavourite.sourceUrl}.`
+    );
+  }
+}
+
 // eventos
 
 form.addEventListener("submit", handleSubmitForm);
 
 deleteAllBtn.addEventListener("click", handleClickDeleteAllBtn);
+
+logBtn.addEventListener("click", handleClickLogBtn);
 
 // código que se ejecuta al cargar
 
